@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.payment.Enum.ResponseSuccessCode;
+import com.example.payment.domain.Member;
 import com.example.payment.model.api.ApiResponse;
 import com.example.payment.model.member.MemberRequestDTO;
 import com.example.payment.model.member.MemberResponseDTO;
@@ -35,7 +37,7 @@ public class MemberController {
      * 회원목록 조회
      * 
      * @param memberRequestDTO
-     * @return
+     * @return ResponseEntity<ApiResponse<List<MemberResponseDTO>>>
      */
     @GetMapping("/list")
     public ResponseEntity<ApiResponse<List<MemberResponseDTO>>> memberList(MemberRequestDTO memberRequestDTO){
@@ -48,14 +50,35 @@ public class MemberController {
         Page<MemberResponseDTO> result = memberService.getMemberList(memberRequestDTO, pageable);
         
         List<MemberResponseDTO> resultList = result.getContent().stream()
-                .map(member -> new MemberResponseDTO(member.getId(), member.getName()
-                                , member.getViewCount(), member.getCreateDt()))        
+                .map(member -> MemberResponseDTO.builder()
+                                        .id(member.getId())
+                                        .name(member.getName())
+                                        .viewCount(member.getViewCount())
+                                        .createDt(member.getCreateDt())
+                                    .build())        
                 .collect(Collectors.toList());
 
-        return ApiResponse.success(ResponseSuccessCode.SUCCESS_GET.getStatus()
+        return ApiResponse.successList(ResponseSuccessCode.SUCCESS_GET.getStatus()
                                     , ResponseSuccessCode.SUCCESS_GET.getCode()
                                     , ResponseSuccessCode.SUCCESS_GET.getMessage()
                                     , resultList, pageable.getPageNumber()+1);
+    }
+
+    /**
+     * 회원 1건 상세조회
+     * 
+     * @param memberid
+     * @return ResponseEntity<ApiResponse<MemberResponseDTO>>
+     */
+    @GetMapping("/detail/{memberid}")
+    public ResponseEntity<ApiResponse<MemberResponseDTO>> memberDetail(@PathVariable(value = "memberid") Long memberid){
+
+        Member result = memberService.getMemberDetail(memberid);
+
+        return ApiResponse.successDetail(ResponseSuccessCode.SUCCESS_GET.getStatus()
+                                        , ResponseSuccessCode.SUCCESS_GET.getCode()
+                                        , ResponseSuccessCode.SUCCESS_GET.getMessage()
+                                        , result.memberEntityToDTO());
     }
 
 }
