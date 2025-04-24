@@ -1,5 +1,9 @@
 package com.example.payment.member;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import com.example.payment.domain.Member;
 import com.example.payment.exception.NoSearchException;
 import com.example.payment.model.member.MemberRequestDTO;
 import com.example.payment.model.member.MemberResponseDTO;
@@ -39,5 +44,36 @@ public class MemberServiceTest {
             log.warn(e.getMessage());
             // 메세지 : 회원목록이 존재하지 않습니다.
         }
+    }
+
+    @Test
+    @DisplayName("회원 1건 조회 테스트 / 낙관적 락 테스트")
+    public void getMemberDetail() throws InterruptedException{
+        // 테스트 : 1번 ID를 가진 회원 조회
+
+        int numberOfUsers = 10;
+
+		ExecutorService executorService = Executors.newFixedThreadPool(numberOfUsers);
+		CountDownLatch latch = new CountDownLatch(numberOfUsers);
+
+        for (int i = 0; i < numberOfUsers; i++) {
+            executorService.submit(() -> {
+                try{
+                    Member result = memberService.getMemberDetail(1L);
+                    log.info(result.toString());
+                } catch(NoSearchException e) { // 회원을 찾을 수 없는 경우
+                    log.warn(e.getMessage());
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await();
+        executorService.shutdown();
+
+        Member result = memberService.getMemberDetail(1L);
+        System.out.println("최종 조회수: " + result.getViewcount());
+        System.out.println("최종 버전: " + result.getVersion());
     }
 }
