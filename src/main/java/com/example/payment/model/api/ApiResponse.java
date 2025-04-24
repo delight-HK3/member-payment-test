@@ -12,12 +12,12 @@ import lombok.Getter;
  * API 요청시 응답에 사용하는 객체
  */
 @Getter
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
     private Response<T> response;
 
-    @Getter 
+    @Getter
+    @JsonInclude(JsonInclude.Include.NON_NULL) 
     public static class Response<T>{
         
         private Header header;
@@ -46,13 +46,18 @@ public class ApiResponse<T> {
     }
 
     @Getter
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     public static class Body<T>{
-        private final T data;
-        private final int pageNo;
+        private T data;
+        private int pageNo;
 
         public Body(T data, int pageNo){
             this.data = data;
             this.pageNo = pageNo;
+        }
+
+        public Body(T data){
+            this.data = data;
         }
     }
 
@@ -60,13 +65,24 @@ public class ApiResponse<T> {
         this.response = response;
     }
 
-    // API 조회 결과 출력 (조회 성공)
-    public static <T> ResponseEntity<ApiResponse<T>> success(HttpStatusCode status, int code, String message , T body, int pageNo) {
+    // API 리스트 조회 결과 출력 (조회 성공)
+    public static <T> ResponseEntity<ApiResponse<T>> successList(HttpStatusCode status, int code, String message , T body, int pageNo) {
         return ResponseEntity.status(status)
                                 .body(new ApiResponse<T>(
                                     new Response<T>(
                                         new Header(code, message)
                                         , new Body<T>(body, pageNo)
+                                    )
+                                ));
+    }
+
+    // API 상세조회 결과 출력 (조회 성공)
+    public static <T> ResponseEntity<ApiResponse<T>> successDetail(HttpStatusCode status, int code, String message , T body) {
+        return ResponseEntity.status(status)
+                                .body(new ApiResponse<T>(
+                                    new Response<T>(
+                                        new Header(code, message)
+                                        , new Body<T>(body)
                                     )
                                 ));
     }
