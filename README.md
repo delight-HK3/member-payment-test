@@ -1,2 +1,2 @@
-# member-payment-test
+# member-point-test
 
