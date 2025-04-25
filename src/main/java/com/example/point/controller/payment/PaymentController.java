@@ -1,8 +1,8 @@
-package com.example.point.controller.point;
+package com.example.point.controller.payment;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PointController {
+public class PaymentController {
     
 }
