@@ -15,7 +15,7 @@ import com.querydsl.core.types.Order;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import static com.example.payment.domain.QMember.member;
+import static com.example.point.domain.QMember.member;
 
 import java.util.List;
 
