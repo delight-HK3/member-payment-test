@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
 
 //Qclass가 생성될 곳을 정의
 def querydslSrcDir = 'src/main/generated'
