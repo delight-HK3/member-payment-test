@@ -28,6 +28,7 @@ public class MemberRepositoryDSLImpl implements MemberRepositoryDSL{
         this.queryFactory = queryFactory;
     }
 
+    // 회원 목록 조회 메서드
     @Override
     public Page<MemberResponseDTO> getMemberList(MemberRequestDTO memberRequestDTO, Pageable pageable) {
 
@@ -51,9 +52,10 @@ public class MemberRepositoryDSLImpl implements MemberRepositoryDSL{
         // (PageImpl에서 DB 3번 호출할 때 PageableExecutionUtils는 2번 호출)
         return PageableExecutionUtils.getPage(result, pageable, () -> count.fetchCount());
     }
-   
+    
     private OrderSpecifier<?> createOrderSpecifier(orderValue sortType) {
 
+        // 만약 입력된 파라미터중에 orderValue가 지정되지 않았으면 DEFAULT로 설정합니다.
         orderValue orderValueNew = (sortType == null) ? orderValue.DEFAULT : sortType;
 
         return switch (orderValueNew) {
