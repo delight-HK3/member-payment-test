@@ -87,8 +87,8 @@ public class ApiResponse<T> {
                                 ));
     }
 
-    // API 조회 결과 출력 (조회 실패)
-    public static <T> ResponseEntity<ApiResponse<T>> fail(HttpStatusCode status, int code, String message) {
+    // API 요청 결과 출력 (헤더만 필요)
+    public static <T> ResponseEntity<ApiResponse<T>> nonBodyMessage(HttpStatusCode status, int code, String message) {
         return ResponseEntity.status(status)
                                 .body(new ApiResponse<T>(
                                     new Response<T>(

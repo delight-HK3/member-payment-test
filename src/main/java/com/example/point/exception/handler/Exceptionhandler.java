@@ -28,7 +28,7 @@ public class Exceptionhandler {
     @ExceptionHandler(NoSearchException.class)
     public <T> ResponseEntity<ApiResponse<T>> NoSearchExceptionHandler(NoSearchException e){
         ResponseFailCode exceptionCode = e.getError();
-        return ApiResponse.fail(exceptionCode.getStatus()
+        return ApiResponse.nonBodyMessage(exceptionCode.getStatus()
                                 , exceptionCode.getCode()
                                 , exceptionCode.getMessage());
     }
@@ -41,7 +41,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public <T> ResponseEntity<ApiResponse<T>> MethodArgumentTypeMismatchExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NO_TYPE_MISMATCH_ARGUMENT.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_TYPE_MISMATCH_ARGUMENT.getStatus()
                                 , ResponseFailCode.NO_TYPE_MISMATCH_ARGUMENT.getCode()
                                 , ResponseFailCode.NO_TYPE_MISMATCH_ARGUMENT.getMessage());
     }
@@ -54,7 +54,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public <T> ResponseEntity<ApiResponse<T>> MethodArgumentNotValidExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NO_VALUE_MISMATCH_ARGUMENT.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_VALUE_MISMATCH_ARGUMENT.getStatus()
                                 , ResponseFailCode.NO_VALUE_MISMATCH_ARGUMENT.getCode()
                                 , ResponseFailCode.NO_VALUE_MISMATCH_ARGUMENT.getMessage());
     }
@@ -67,7 +67,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(MissingPathVariableException.class)
     public <T> ResponseEntity<ApiResponse<T>> MissingPathVariableExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NO_REQUIRED_ARGUMENT.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_REQUIRED_ARGUMENT.getStatus()
                                 , ResponseFailCode.NO_REQUIRED_ARGUMENT.getCode()
                                 , ResponseFailCode.NO_REQUIRED_ARGUMENT.getMessage());
     }
@@ -80,7 +80,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(NoResourceFoundException.class)
     public <T> ResponseEntity<ApiResponse<T>> NoResourceFoundExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NOT_FOUND_PAGE.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NOT_FOUND_PAGE.getStatus()
                                 , ResponseFailCode.NOT_FOUND_PAGE.getCode()
                                 , ResponseFailCode.NOT_FOUND_PAGE.getMessage());
     }
@@ -93,7 +93,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public <T> ResponseEntity<ApiResponse<T>> HttpRequestMethodNotSupportedExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NO_MATCH_METHOD.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_MATCH_METHOD.getStatus()
                                 , ResponseFailCode.NO_MATCH_METHOD.getCode()
                                 , ResponseFailCode.NO_MATCH_METHOD.getMessage());
     }
@@ -106,7 +106,7 @@ public class Exceptionhandler {
      */
     @ExceptionHandler(ConflictException.class)
     public <T> ResponseEntity<ApiResponse<T>> ConflictExceptionHandler(){
-        return ApiResponse.fail(ResponseFailCode.NO_MATCH_METHOD.getStatus()
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_MATCH_METHOD.getStatus()
                                 , ResponseFailCode.NO_MATCH_METHOD.getCode()
                                 , ResponseFailCode.NO_MATCH_METHOD.getMessage());
     }
