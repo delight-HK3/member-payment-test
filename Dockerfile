@@ -3,7 +3,7 @@ FROM eclipse-temurin:17 AS jre-build
 
 # Gradle Wrapper 파일 복사 및 실행 권한 부여
 COPY ./gradlew .
-COPY ./gradle gradle .
+COPY ./gradle gradle
 COPY ./build.gradle . 
 COPY ./settings.gradle .
 COPY ./src src
