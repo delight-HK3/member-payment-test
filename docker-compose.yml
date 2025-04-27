@@ -6,7 +6,7 @@ services:
     image: mysql:8.0.42
     container_name: point-mysql
     ports:
-      - "3308:3308"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: cometrue
       TZ: Asia/Seoul
@@ -31,7 +31,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3308/point?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/point?useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=pointer
       - SPRING_DATASOURCE_PASSWORD=pointer
     depends_on:
