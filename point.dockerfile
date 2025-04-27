@@ -14,7 +14,7 @@ RUN chmod +x gradlew
 RUN ./gradlew clean build -x test
 
 # 복사할 파일 위치 설정
-ARG JAR_FILE=/build/libs/point.jar
+ARG JAR_FILE=point.jar
 
 # 베이스 이미지 설정
 FROM eclipse-temurin:17
