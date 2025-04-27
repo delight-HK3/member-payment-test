@@ -23,7 +23,7 @@ FROM eclipse-temurin:17
 WORKDIR /app
 
 # 파일 복사
-COPY --from=jre-build /app/${JAR_FILE} /point.jar
+COPY --from=jre-build /app/build/libs/${JAR_FILE} /point.jar
 
 # 포트 설정
 EXPOSE 8090
