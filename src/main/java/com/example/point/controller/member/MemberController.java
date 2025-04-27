@@ -24,7 +24,7 @@ import com.example.point.service.member.MemberService;
  * 멤버 관련기능 Controller
  */
 @RestController
-@RequestMapping("/payment/v1")
+@RequestMapping("/point/v1")
 public class MemberController {
     
     private final MemberService memberService;
