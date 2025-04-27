@@ -27,7 +27,7 @@ services:
   app:
     container_name: point-app
     build:
-      dockerfile: ./
+      dockerfile: ./Dockerfile
     ports:
       - "8090:8090"
     environment:
