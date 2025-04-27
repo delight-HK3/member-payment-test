@@ -31,7 +31,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/point?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/point?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=pointer
       - SPRING_DATASOURCE_PASSWORD=pointer
     depends_on:

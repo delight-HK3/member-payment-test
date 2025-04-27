@@ -39,7 +39,7 @@ public class MemberController {
      * @param memberRequestDTO
      * @return ResponseEntity<ApiResponse<List<MemberResponseDTO>>>
      */
-    @GetMapping("/member")
+    @GetMapping(value = "/member", produces = "application/json;charset=UTF-8")
     public ResponseEntity<ApiResponse<List<MemberResponseDTO>>> memberList(MemberRequestDTO memberRequestDTO){
 
         int pageno = (memberRequestDTO.getPageno() <= 0) ? 0 : memberRequestDTO.getPageno()-1;
@@ -70,7 +70,7 @@ public class MemberController {
      * @param memberid
      * @return ResponseEntity<ApiResponse<MemberResponseDTO>>
      */
-    @GetMapping("/member/{memberid}")
+    @GetMapping(value="/member/{memberid}", produces = "application/json;charset=UTF-8")
     public ResponseEntity<ApiResponse<MemberResponseDTO>> memberDetail(@PathVariable(value = "memberid") Long memberid){
 
         Member result = memberService.getMemberDetail(memberid);
