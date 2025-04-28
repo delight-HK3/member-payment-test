@@ -12,6 +12,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import com.example.point.Enum.ResponseFailCode;
 import com.example.point.exception.ConflictException;
 import com.example.point.exception.NoSearchException;
+import com.example.point.exception.PaymentFailException;
 import com.example.point.model.api.ApiResponse;
 
 @RestControllerAdvice
@@ -20,6 +21,8 @@ public class Exceptionhandler {
     /**
      * 회원목록 전체 조회 시 존재하지 않는경우
      * , 특정회원 조회 시 존재하지 않는경우 Handler
+     * 
+     * 회원 관련 Exception
      * 
      * @param <T>
      * @param e
@@ -31,6 +34,37 @@ public class Exceptionhandler {
         return ApiResponse.nonBodyMessage(exceptionCode.getStatus()
                                 , exceptionCode.getCode()
                                 , exceptionCode.getMessage());
+    }
+
+    /**
+     * 조회시 다른 회원과 충돌이 발생한 경우 Handler
+     * 
+     * 회원 관련 Exception
+     * 
+     * @param <T>
+     * @return
+     */
+    @ExceptionHandler(ConflictException.class)
+    public <T> ResponseEntity<ApiResponse<T>> ConflictExceptionHandler(){
+        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_MATCH_METHOD.getStatus()
+                                , ResponseFailCode.NO_MATCH_METHOD.getCode()
+                                , ResponseFailCode.NO_MATCH_METHOD.getMessage());
+    }   
+
+    /**
+     * 결제시도시 발생하는 각종 Exception Handler
+     * 
+     * 결제 관련 Exception
+     * 
+     * @param <T>
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(PaymentFailException.class)
+    public <T> ResponseEntity<ApiResponse<T>> PaymentFailExceptionHandler(Exception e){
+        return ApiResponse.nonBodyMessage(null
+                                        , null
+                                        , e.getMessage());
     }
 
     /**
@@ -98,16 +132,4 @@ public class Exceptionhandler {
                                 , ResponseFailCode.NO_MATCH_METHOD.getMessage());
     }
 
-    /**
-     * 조회시 다른 사용자와 충돌이 발생한 경우 Handler
-     * 
-     * @param <T>
-     * @return
-     */
-    @ExceptionHandler(ConflictException.class)
-    public <T> ResponseEntity<ApiResponse<T>> ConflictExceptionHandler(){
-        return ApiResponse.nonBodyMessage(ResponseFailCode.NO_MATCH_METHOD.getStatus()
-                                , ResponseFailCode.NO_MATCH_METHOD.getCode()
-                                , ResponseFailCode.NO_MATCH_METHOD.getMessage());
-    }
 }   
