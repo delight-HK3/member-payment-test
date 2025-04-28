@@ -15,6 +15,9 @@ import com.example.point.repository.member.MemberRepository;
 
 import jakarta.persistence.OptimisticLockException;
 
+/**
+ * 회원관련 Service
+ */
 @Service
 public class MemberService {
     
