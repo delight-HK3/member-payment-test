@@ -13,7 +13,7 @@ CREATE TABLE `member` (
   `created_at` datetime(6) NOT NULL COMMENT `생성 시간`,
   `version` bigint DEFAULT `0`,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `point`.`member`
 (id, name, viewcount, created_at, version)
@@ -30,3 +30,19 @@ VALUES(3, `김기명`, 0, '2025-04-26 16:17:39', 0);
 INSERT INTO `point`.`member`
 (id, name, viewcount, created_at, version)
 VALUES(4, `박종건`, 0, '2025-04-26 16:17:41', 0);
+
+INSERT INTO `point`.`member`
+(id, name, viewcount, created_at, version)
+VALUES(5, '안성수', 0, '2025-04-27 15:35:08', 0);
+
+INSERT INTO `point`.`member`
+(id, name, viewcount, created_at, version)
+VALUES(6, '차서하', 0, '2025-04-27 15:35:10', 0);
+
+INSERT INTO `point`.`member`
+(id, name, viewcount, created_at, version)
+VALUES(7, '성한수', 0, '2025-04-28 15:35:11', 0);
+
+INSERT INTO `point`.`member`
+(id, name, viewcount, created_at, version)
+VALUES(8, '이화연', 0, '2025-04-28 15:35:12', 0);
