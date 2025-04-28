@@ -36,10 +36,10 @@ public class ApiResponse<T> {
     // api header 부분
     @Getter
     public static class Header{
-        private final int code;
+        private final String code;
         private final String message;
 
-        public Header(int code, String message){
+        public Header(String code, String message){
             this.code = code;
             this.message = message;
         }
@@ -66,7 +66,7 @@ public class ApiResponse<T> {
     }
 
     // API 리스트 조회 결과 출력 (조회 성공)
-    public static <T> ResponseEntity<ApiResponse<T>> successList(HttpStatusCode status, int code, String message , T body, int pageNo) {
+    public static <T> ResponseEntity<ApiResponse<T>> successList(HttpStatusCode status, String code, String message , T body, int pageNo) {
         return ResponseEntity.status(status)
                                 .body(new ApiResponse<T>(
                                     new Response<T>(
@@ -77,7 +77,7 @@ public class ApiResponse<T> {
     }
 
     // API 상세조회 결과 출력 (조회 성공)
-    public static <T> ResponseEntity<ApiResponse<T>> successDetail(HttpStatusCode status, int code, String message , T body) {
+    public static <T> ResponseEntity<ApiResponse<T>> successDetail(HttpStatusCode status, String code, String message , T body) {
         return ResponseEntity.status(status)
                                 .body(new ApiResponse<T>(
                                     new Response<T>(
@@ -88,7 +88,7 @@ public class ApiResponse<T> {
     }
 
     // API 요청 결과 출력 (헤더만 필요)
-    public static <T> ResponseEntity<ApiResponse<T>> nonBodyMessage(HttpStatusCode status, int code, String message) {
+    public static <T> ResponseEntity<ApiResponse<T>> nonBodyMessage(HttpStatusCode status, String code, String message) {
         return ResponseEntity.status(status)
                                 .body(new ApiResponse<T>(
                                     new Response<T>(
