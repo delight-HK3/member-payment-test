@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public enum paymentValue {
     
-    CARD("card"),
-    POINT("point");
+    TOSS("toss"),
+    KAKAO("kakao");
 
-    private final String property;
+    private final String type;
 
-    paymentValue(String property){
-        this.property = property;
+    paymentValue(String type){
+        this.type = type;
     }
 }
