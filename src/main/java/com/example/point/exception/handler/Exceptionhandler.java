@@ -11,6 +11,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.example.point.Enum.ResponseFailCode;
 import com.example.point.exception.ConflictException;
+import com.example.point.exception.NoEnumArgException;
 import com.example.point.exception.NoSearchException;
 import com.example.point.exception.PaymentFailException;
 import com.example.point.model.api.ApiResponse;
@@ -50,7 +51,7 @@ public class Exceptionhandler {
                                 , ResponseFailCode.NO_MATCH_METHOD.getCode()
                                 , ResponseFailCode.NO_MATCH_METHOD.getMessage());
     }   
-
+    
     /**
      * 결제시도시 발생하는 각종 Exception Handler
      * 
@@ -99,7 +100,7 @@ public class Exceptionhandler {
      * @param <T>
      * @return
      */
-    @ExceptionHandler(MissingPathVariableException.class)
+    @ExceptionHandler({MissingPathVariableException.class, NoEnumArgException.class})
     public <T> ResponseEntity<ApiResponse<T>> MissingPathVariableExceptionHandler(){
         return ApiResponse.nonBodyMessage(ResponseFailCode.NO_REQUIRED_ARGUMENT.getStatus()
                                 , ResponseFailCode.NO_REQUIRED_ARGUMENT.getCode()
