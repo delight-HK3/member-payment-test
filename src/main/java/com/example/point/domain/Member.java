@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.point.model.member.MemberResponseDTO;
 
@@ -42,6 +43,7 @@ public class Member {
     @Comment(value = "회원 조회수")
     private int viewcount;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm.ss")
     @Column(name = "created_at", nullable = false, updatable = false)
     @Comment(value = "생성 시간")
     private LocalDateTime createdAt;

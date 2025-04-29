@@ -1,5 +1,7 @@
 package com.example.point.domain;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
@@ -14,6 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
 
 /**
  * point(포인트) Entity 
@@ -39,4 +42,14 @@ public class Point {
     @Comment(value = "남은 포인트")
     private int amountpoint;
 
+    // 포인트 추가
+    public void updtPoint(int point){
+        this.amountpoint += point;
+    }
+
+    @Builder
+    public Point(Member member, int amountpoint){
+        this.member = member;
+        this.amountpoint = amountpoint;
+    }
 }
