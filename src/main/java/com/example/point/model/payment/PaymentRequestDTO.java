@@ -1,6 +1,8 @@
 package com.example.point.model.payment;
 
+import com.example.point.Enum.paymentTypeValue;
 import com.example.point.Enum.paymentValue;
+import com.example.point.custom.ValidEnum;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -12,14 +14,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PaymentRequestDTO {
-    
-    @NotNull
-    private paymentValue payment;   // 결제 수단
-    
-    @NotNull
-    private int memberid;   // 회원 ID
 
     @NotNull
-    private int amount;     // 결제 금액
+    private Integer amount;     // 결제 금액
+
+    @ValidEnum(enumClass = paymentValue.class)
+    private String payment;   //  결제 플랫폼
+
+    @ValidEnum(enumClass = paymentTypeValue.class)
+    private String paytype;   // 결제 수단
 
 }
