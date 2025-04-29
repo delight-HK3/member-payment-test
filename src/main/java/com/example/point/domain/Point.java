@@ -1,7 +1,5 @@
 package com.example.point.domain;
 
-import java.time.LocalDateTime;
-
 import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
