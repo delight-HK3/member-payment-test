@@ -16,7 +16,8 @@ public enum ResponseFailCode {
     MEMBER_EMPTY(HttpStatus.NOT_FOUND ,"MEMBER_EMPTY" ,"There is no member list"),                  // 회원목록이 없습니다.
     
     // 결제관련 메세지
-    
+    NO_SEARCH_PAYMENT(HttpStatus.NOT_FOUND, "NO_SEARCH_PAYMENT", "This payment platform is not supported."),            // 지원하지 않는 결제 플랫폼 입니다.
+    NO_SEARCH_PAYMENT_TYPE(HttpStatus.NOT_FOUND, "NO_SEARCH_PAYMENT_TYPE", "This payment Type is not supported."),    // 지원하지 않는 결제 방식입니다.
 
     // 데이터베이스 관련 메세지
     DATABASE_CONFLICT(HttpStatus.CONFLICT, "DATABASE_CONFLICT", "There has been a conflict with another user. Please try terrorizing again."),   // 다른 사용자와 충돌이 발생했습니다. 잠시 후 다시 시도해주세요.
