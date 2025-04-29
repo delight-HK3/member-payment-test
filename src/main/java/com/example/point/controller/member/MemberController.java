@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.point.Enum.ResponseSuccessCode;
-import com.example.point.domain.Member;
 import com.example.point.model.api.ApiResponse;
 import com.example.point.model.member.MemberRequestDTO;
 import com.example.point.model.member.MemberResponseDTO;
@@ -54,6 +53,7 @@ public class MemberController {
                                         .id(member.getId())
                                         .name(member.getName())
                                         .viewCount(member.getViewCount())
+                                        .amountPoint(member.getAmountPoint())
                                         .createDt(member.getCreateDt())
                                     .build())        
                 .collect(Collectors.toList());
@@ -73,12 +73,14 @@ public class MemberController {
     @GetMapping(value="/member/{memberid}", produces = "application/json;charset=UTF-8")
     public ResponseEntity<ApiResponse<MemberResponseDTO>> memberDetail(@PathVariable(value = "memberid") Long memberid){
 
-        Member result = memberService.getMemberDetail(memberid);
+        memberService.memberViewCntUpdt(memberid); // 조회수 1증가
+
+        MemberResponseDTO result = memberService.getMemberDetail(memberid);
 
         return ApiResponse.successDetail(ResponseSuccessCode.SUCCESS_GET.getStatus()
                                         , ResponseSuccessCode.SUCCESS_GET.getCode()
                                         , ResponseSuccessCode.SUCCESS_GET.getMessage()
-                                        , result.memberEntityToDTO());
+                                        , result);
     }
 
 }

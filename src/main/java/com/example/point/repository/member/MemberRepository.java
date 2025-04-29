@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.point.domain.Member;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryDSL {
-    
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryDSL { 
+
 }

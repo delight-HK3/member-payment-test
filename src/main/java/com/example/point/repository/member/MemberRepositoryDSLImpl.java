@@ -16,6 +16,7 @@ import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import static com.example.point.domain.QMember.member;
+import static com.example.point.domain.QPoint.point;
 
 import java.util.List;
 
@@ -28,7 +29,25 @@ public class MemberRepositoryDSLImpl implements MemberRepositoryDSL{
         this.queryFactory = queryFactory;
     }
 
-    // 회원 목록 조회 메서드
+    // 특정 회원 조회
+    @Override
+    public MemberResponseDTO getMemberDetail(Long memberid) {
+        MemberResponseDTO result = queryFactory
+                                        .select(Projections.constructor(MemberResponseDTO.class,
+                                            member.id
+                                            , member.name
+                                            , member.viewcount
+                                            , point.amountpoint
+                                            , member.createdAt
+                                        ))
+                                        .from(member).leftJoin(point).on(member.id.eq(point.member.id))
+                                        .where(member.id.eq(memberid))
+                                        .fetchOne();
+        
+        return result;
+    }
+
+    // 회원 목록 조회
     @Override
     public Page<MemberResponseDTO> getMemberList(MemberRequestDTO memberRequestDTO, Pageable pageable) {
 
@@ -37,9 +56,10 @@ public class MemberRepositoryDSLImpl implements MemberRepositoryDSL{
                                         member.id
                                         , member.name
                                         , member.viewcount
+                                        , point.amountpoint
                                         , member.createdAt
                                     ))
-                                    .from(member)
+                                    .from(member).leftJoin(point).on(member.id.eq(point.member.id))
                                     .orderBy(createOrderSpecifier(memberRequestDTO.getSort()))
                                     .offset(pageable.getOffset())
                                     .limit(pageable.getPageSize())

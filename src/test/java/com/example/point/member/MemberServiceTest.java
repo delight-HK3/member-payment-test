@@ -36,7 +36,7 @@ public class MemberServiceTest {
         try{
             MemberRequestDTO memberRequestDTO = new MemberRequestDTO();
             //memberRequestDTO.setSortType(orderValue.VIEWCNT);
-            Pageable pageable = PageRequest.of(0,2);
+            Pageable pageable = PageRequest.of(0,5);
             
             Page<MemberResponseDTO> memberList = memberService.getMemberList(memberRequestDTO, pageable);
             log.info(memberList.toString());
@@ -59,7 +59,7 @@ public class MemberServiceTest {
         for (int i = 0; i < numberOfUsers; i++) {
             executorService.submit(() -> {
                 try{
-                    Member result = memberService.getMemberDetail(1L);
+                    MemberResponseDTO result = memberService.getMemberDetail(1L);
                     log.info(result.toString());
                 } catch(NoSearchException e) { // 회원을 찾을 수 없는 경우
                     log.warn(e.getMessage());
@@ -72,8 +72,7 @@ public class MemberServiceTest {
         latch.await();
         executorService.shutdown();
 
-        Member result = memberService.getMemberDetail(1L);
-        System.out.println("최종 조회수: " + result.getViewcount());
-        System.out.println("최종 버전: " + result.getVersion());
+        MemberResponseDTO result = memberService.getMemberDetail(1L);
+        System.out.println("최종 조회수: " + result.getViewCount());
     }
 }

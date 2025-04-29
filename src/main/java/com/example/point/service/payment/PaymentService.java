@@ -28,13 +28,16 @@ public class PaymentService {
         this.typeservice = typeservice;
         this.memberRepository = memberRepository;
     }
-
+    
+    // 결제요청
     @Transactional
     public String requestPayment(PaymentRequestDTO paymentRequestDTO, Long memberid){
         
+        // 회원 존재여부 확인
         Member member = memberRepository.findById(memberid)
                             .orElseThrow(() -> new NoSearchException(ResponseFailCode.NO_SEARCH_MEMBER));
         
+        // 결제 플랫폼에 맞는 Service 조회
         PaymentTypeService paymentTypeService = this.findPayType(paymentRequestDTO.getPayment());
         
         try{

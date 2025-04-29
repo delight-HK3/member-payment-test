@@ -42,22 +42,31 @@ public class MemberService {
         }
 
         return memberResult;
-    }   
+    }  
 
     /**
-     * 특정 회원 조회 (조회 성공시 조회수 1증가)
+     * 특정 회원 조회
+     * 
+     * @param memberid
+     * @return MemberResponseDTO
+     */
+    public MemberResponseDTO getMemberDetail(Long memberid){
+        return memberRepository.getMemberDetail(memberid);
+    }
+
+    /**
+     * 조회 성공시 조회수 1증가
      * 
      * @param memberid
      * @return Member
      */
     @Transactional
-    public Member getMemberDetail(Long memberid){
+    public void memberViewCntUpdt(Long memberid){
         Member member = memberRepository.findById(memberid)
                             .orElseThrow(() -> new NoSearchException(ResponseFailCode.NO_SEARCH_MEMBER));
         try{
             member.plusViewCount();
             memberRepository.save(member);
-            return member;
         } catch (OptimisticLockException e){ // 낙관적 잠금 충돌감지
             throw new ConflictException(ResponseFailCode.DATABASE_CONFLICT);
         }
