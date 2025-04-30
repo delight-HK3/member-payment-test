@@ -28,7 +28,6 @@ public class PaymentServiceTest {
             PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO();
             paymentRequestDTO.setAmount(30000);
             paymentRequestDTO.setPayment("toss");
-            paymentRequestDTO.setPaytype("card");
 
             paymentService.requestPayment(paymentRequestDTO, 5L);
         } catch(NoSearchException e) {
@@ -47,7 +46,6 @@ public class PaymentServiceTest {
             PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO();
             paymentRequestDTO.setAmount(10000);
             paymentRequestDTO.setPayment("toss");
-            paymentRequestDTO.setPaytype("card");
 
             paymentService.requestPayment(paymentRequestDTO, 1L);
         } catch(NoSearchException e) {
