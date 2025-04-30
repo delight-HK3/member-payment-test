@@ -20,7 +20,7 @@ public enum ResponseFailCode {
     NO_SEARCH_PAYMENT_TYPE(HttpStatus.NOT_FOUND, "NO_SEARCH_PAYMENT_TYPE", "This payment Type is not supported."),    // 지원하지 않는 결제 방식입니다.
 
     // 데이터베이스 관련 메세지
-    DATABASE_CONFLICT(HttpStatus.CONFLICT, "DATABASE_CONFLICT", "There has been a conflict with another user. Please try terrorizing again."),   // 다른 사용자와 충돌이 발생했습니다. 잠시 후 다시 시도해주세요.
+    DATABASE_CONFLICT(HttpStatus.CONFLICT, "USER_CONFLICT", "There has been a conflict with another user. Please try terrorizing again."),   // 다른 사용자와 충돌이 발생했습니다. 잠시 후 다시 시도해주세요.
 
     // 클라이언트 요청관련 메세지
     NO_REQUIRED_ARGUMENT(HttpStatus.BAD_REQUEST,"NO_REQUIRED_ARGUMENT","A required parameter is missing."),                         // 필수 파라미터가 누락되었습니다.

@@ -12,9 +12,7 @@ import lombok.Getter;
 public enum ResponseSuccessCode {
     
     SUCCESS_GET(HttpStatus.OK , "SUCCESS_GET", "successfully get"),           // 성공적으로 조회 완료
-    SUCCESS_POST(HttpStatus.CREATED , "SUCCESS_POST","successfully post"),    // 성공적으로 생성 완료 
-    SUCCESS_PATCH(HttpStatus.OK , "SUCCESS_PATCH","successfully edit"),       // 성공적으로 수정 완료
-    SUCCESS_DELETE(HttpStatus.OK , "SUCCESS_DELETE","successfully delete");   // 성공적으로 삭제 완료
+    SUCCESS_POST(HttpStatus.CREATED , "SUCCESS_POST","successfully post");    // 성공적으로 생성 완료 
 
     private final HttpStatusCode status; // http 상태
     private final String code;           // http 상태 코드
