@@ -35,8 +35,6 @@ public class EnumValidator implements ConstraintValidator<ValidEnum, String>{
         if (!enumValues.contains(value.toUpperCase())) {
             if (enumClass.getSimpleName().equals("paymentValue")) {
                 throw new NoSearchException(ResponseFailCode.NO_SEARCH_PAYMENT);
-            } else if (enumClass.getSimpleName().equals("paymentTypeValue")) {
-                throw new NoSearchException(ResponseFailCode.NO_SEARCH_PAYMENT_TYPE);
             } else {
                 return false;
             }
