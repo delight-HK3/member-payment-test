@@ -1,6 +1,5 @@
 package com.example.point.model.payment;
 
-import com.example.point.Enum.paymentTypeValue;
 import com.example.point.Enum.paymentValue;
 import com.example.point.custom.ValidEnum;
 
@@ -18,10 +17,13 @@ public class PaymentRequestDTO {
     @NotNull
     private Integer amount;     // 결제 금액
 
+    @NotNull
+    private String orderId;     // 결제 ID
+
+    @NotNull
+    private String paymentKey;  // 결제 Key
+
     @ValidEnum(enumClass = paymentValue.class)
     private String payment;   //  결제 플랫폼
-
-    @ValidEnum(enumClass = paymentTypeValue.class)
-    private String paytype;   // 결제 수단
-
+    
 }

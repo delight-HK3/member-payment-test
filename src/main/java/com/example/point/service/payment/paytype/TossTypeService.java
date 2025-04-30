@@ -49,14 +49,12 @@ public class TossTypeService implements PaymentTypeService{
     @Override
     public PaymentResultDTO getPaymentRedirectURL(PaymentRequestDTO paymentRequestDTO) throws Exception {
 
-        String orderid = "chdimFOf9tnXV5u8Xqtlodgsdf";
-
         Base64.Encoder encoder = Base64.getEncoder();
         byte[] encodedBytes = encoder.encode((tossApiKey + ":").getBytes(StandardCharsets.UTF_8));
         String authorizations = "Basic " + new String(encodedBytes);
     
         JSONObject obj = new JSONObject();
-        obj.put("orderId", orderid);
+        obj.put("orderId", paymentRequestDTO.getOrderId());
         obj.put("amount", paymentRequestDTO.getAmount());
         obj.put("paymentKey", tossApiKey);
 
@@ -101,7 +99,6 @@ public class TossTypeService implements PaymentTypeService{
                                             .member(member)
                                             .message(resultDTO.getMessage())
                                             .payment(paymentRequestDTO.getPayment())
-                                            .paymenttype(paymentRequestDTO.getPaytype())
                                             .code(resultDTO.getCode())
                                             .createdAt(nowOutNanos)
                                             .build();

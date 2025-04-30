@@ -17,6 +17,6 @@ public interface PaymentTypeService {
     PaymentResultDTO getPaymentRedirectURL(PaymentRequestDTO paymentRequestDTO) throws Exception ; 
 
     // 결제 후 포인트 및 결제기록 저장 
-    void savePayment(Member member,PaymentRequestDTO paymentRequestDTO, PaymentResultDTO paymentResultDTO); 
+    void savePayment(Member member, PaymentRequestDTO paymentRequestDTO, PaymentResultDTO paymentResultDTO); 
 
 }

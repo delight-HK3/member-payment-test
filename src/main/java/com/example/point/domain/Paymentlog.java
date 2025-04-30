@@ -46,10 +46,6 @@ public class Paymentlog {
     @Column(name = "payment")
     @Comment(value = "결제 플랫폼")
     private String payment;
-    
-    @Column(name = "paymenttype")
-    @Comment(value = "결제 수단")
-    private String paymenttype;
 
     @Column(name = "code")
     @Comment(value = "결제 상태 코드")
@@ -65,11 +61,10 @@ public class Paymentlog {
     private LocalDateTime createdAt;
     
     @Builder
-    public Paymentlog(Member member, int amount, String paymenttype, String payment, 
+    public Paymentlog(Member member, int amount, String payment, 
                         int code, String message, LocalDateTime createdAt){
         this.member = member;
         this.amount = amount;
-        this.paymenttype = paymenttype;
         this.payment = payment;
         this.code = code;
         this.message = message;
