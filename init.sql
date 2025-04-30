@@ -86,7 +86,6 @@ CREATE TABLE `payment_log` (
   `created_at` datetime(6) NOT NULL COMMENT '생성 시간',
   `message` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '결제 상태 메세지',
   `payment` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '결제 플랫폼',
-  `paymenttype` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '결제 수단',
   PRIMARY KEY (`id`),
   KEY `FKgb3ynxholti329wv5jfpcoh1t` (`member_id`),
   CONSTRAINT `FKgb3ynxholti329wv5jfpcoh1t` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
